@@ -1,0 +1,3 @@
+D:/Android/android_virtualTouch/CMakeFiles/touch.dir
+D:/Android/android_virtualTouch/CMakeFiles/edit_cache.dir
+D:/Android/android_virtualTouch/CMakeFiles/rebuild_cache.dir

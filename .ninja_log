@@ -1,0 +1,6 @@
+# ninja log v5
+4	615	7607226004455370	CMakeFiles/touch.dir/src/main.cpp.o	301925f9d332610c
+4	854	7607229698657488	CMakeFiles/touch.dir/src/tools/tools.cpp.o	1cddffc8e03c6eb8
+855	923	7607229699314667	touch	3516e4a5cef8506
+4	818	7607231930002387	CMakeFiles/touch.dir/src/tools/tools.cpp.o	1cddffc8e03c6eb8
+818	888	7607231930665695	touch	3516e4a5cef8506
