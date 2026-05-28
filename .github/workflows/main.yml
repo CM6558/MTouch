@@ -23,13 +23,13 @@ jobs:
       # 3. 使用 curl 下载官方最新的 Play CDN 脚本，并重命名
       - name: Download Tailwind Play CDN
         run: |
-          curl -sL https://cdn.tailwindcss.com -o dist/tailwindcss-play.js
+          curl -sL https://tailwindcss.com -o dist/tailwindcss-play.js
           echo "下载成功，文件大小："
           du -sh dist/tailwindcss-play.js
 
       # 4. 将下载好的文件打包成 GitHub Actions Artifacts（构建产物）
       - name: Upload Artifact
-        uses: actions/actions-by-examples/upload-artifact@v4 # 官方标准的产物上传组件
+        uses: actions/upload-artifact@v4 # 👈 这里已修正为官方正确的标准仓库路径
         with:
           name: tailwind-intranet-pkg # 内网下载时的压缩包名称
           path: dist/tailwindcss-play.js # 需要打包的文件路径
