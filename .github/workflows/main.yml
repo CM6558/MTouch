@@ -1,0 +1,36 @@
+name: Download Tailwind CDN for Intranet
+
+# 触发条件：支持手动触发，或者每当推送到 main 分支时自动触发
+on:
+  workflow_dispatch: # 支持在 GitHub 网页上点击按钮手动触发
+  push:
+    branches:
+      - main
+
+jobs:
+  download-and-pack:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 检出仓库代码（可选，主要为了保持目录结构）
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. 创建存放 CDN 文件的目录
+      - name: Create directory
+        run: mkdir -p dist
+
+      # 3. 使用 curl 下载官方最新的 Play CDN 脚本，并重命名
+      - name: Download Tailwind Play CDN
+        run: |
+          curl -sL https://cdn.tailwindcss.com -o dist/tailwindcss-play.js
+          echo "下载成功，文件大小："
+          du -sh dist/tailwindcss-play.js
+
+      # 4. 将下载好的文件打包成 GitHub Actions Artifacts（构建产物）
+      - name: Upload Artifact
+        uses: actions/actions-by-examples/upload-artifact@v4 # 官方标准的产物上传组件
+        with:
+          name: tailwind-intranet-pkg # 内网下载时的压缩包名称
+          path: dist/tailwindcss-play.js # 需要打包的文件路径
+          retention-days: 7 # 在 GitHub 上保留 7 天
