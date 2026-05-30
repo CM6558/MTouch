@@ -1,0 +1,33 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  workflow_dispatch: # 允许您在网页上点击按钮手动触发
+
+jobs:
+  download-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download PE Image
+        run: |
+          # 创建存放目录
+          mkdir -p ./pe_files
+          
+          # 【方案 A】下载国内公认最纯净的 微PE 工具箱 (WePE V2.3 64位原版)
+          echo "开始下载微PE..."
+          curl -L -o ./pe_files/WePE_64_V2.3.exe "https://wepe.com.cn"
+          
+          # 【方案 B（备用）】如果您有其他特定的直接下载链接(直链)，可以把下面这一行的 URL 替换掉：
+          # curl -L -o ./pe_files/custom_pe.iso "您的其他PE直链URL"
+
+      - name: Upload PE to GitHub Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-purified-pe-tool # 您下载时的压缩包名字
+          path: ./pe_files/         # 将该文件夹下的所有文件打包上传
+          retention-days: 1         # 构件保留1天，过期自动销毁
